@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshAir Labs</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #1a1a2e;
+            background: #fafafa;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f3443 0%, #34e89e 100%);
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.85;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .entries {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .entry {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+            border-left: 4px solid #34e89e;
+            transition: transform 0.2s ease;
+        }
+
+        .entry:hover {
+            transform: translateY(-2px);
+        }
+
+        .entry-date {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+
+        .entry h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #0f3443;
+        }
+
+        .entry p {
+            color: #444;
+            font-size: 1rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e8faf0;
+            color: #0f3443;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+            margin-right: 0.4rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>FreshAir Labs</h1>
+        <p>Building things, one experiment at a time.</p>
+    </header>
+
+    <main>
+        <div class="entries">
+            <article class="entry">
+                <div class="entry-date">February 2026</div>
+                <h2>Platform Consolidation</h2>
+                <p>Migrated 23 services onto a single unified platform with a shared capability layer. One repo, one VM, one gateway routing everything. Swappable connectors for local dev and GCP production.</p>
+                <span class="tag">infrastructure</span>
+                <span class="tag">python</span>
+                <span class="tag">gcp</span>
+            </article>
+
+            <article class="entry">
+                <div class="entry-date">January 2026</div>
+                <h2>LLM-Powered Telegram Bot</h2>
+                <p>A Telegram bot backed by Gemini that handles conversations, screenshot-to-blog workflows, and integrates with a multi-provider API gateway supporting OpenAI, Anthropic, and Google models.</p>
+                <span class="tag">llm</span>
+                <span class="tag">telegram</span>
+                <span class="tag">gemini</span>
+            </article>
+
+            <article class="entry">
+                <div class="entry-date">December 2025</div>
+                <h2>Medical Records Analysis</h2>
+                <p>CCD/C-CDA parser paired with medical LLMs (MedGemma, DeepSeek) for structured clinical document analysis. Runs on RunPod GPUs for inference.</p>
+                <span class="tag">healthcare</span>
+                <span class="tag">llm</span>
+                <span class="tag">runpod</span>
+            </article>
+        </div>
+    </main>
+
+    <footer>
+        FreshAir Labs &mdash; 2026
+    </footer>
+</body>
+</html>
