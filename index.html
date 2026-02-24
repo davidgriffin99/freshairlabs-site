@@ -159,24 +159,40 @@
     <main>
         <div class="entries">
 
-            <article class="entry" id="hello-world">
+            <article class="entry" id="flux-assumptions">
                 <div class="entry-meta">
                     <time datetime="2026-02-24">February 24, 2026</time>
                 </div>
-                <h2>Why I Started Writing</h2>
+                <h2>10 Things I Assumed Before Writing a Line of Code</h2>
 
-                <p>I've been building AI-powered tools for a while now — bots, pipelines, infrastructure — and I realized I was having too much fun not to share it.</p>
+                <p>I'm building a platform that runs 23 services on a single machine — API proxies, Telegram bots, webhook processors, task managers, and AI pipelines — all behind one gateway. Before writing any code, I wrote down 10 assumptions about the environment these services would operate in. Every design decision flows from these.</p>
 
-                <p>This site is a place to document the experiments. Some will be practical (how do you actually run a medical LLM on your own data without sending it to the cloud?). Some will be architectural (what happens when you try to consolidate 23 microservices onto one machine?). Some will just be weird ideas that seemed worth trying.</p>
+                <p><strong>A1: Fragility</strong> — External APIs fail without warning. Every outbound call handles timeouts, 5xx errors, and the provider simply being gone.</p>
 
-                <p>The common thread is AI as a tool for real problems. Not "AI will change everything" thought-leadership — more like "I had a stack of medical records and wanted to know what a language model could actually find in them." Or "I wanted a Telegram bot that could switch between Gemini, Claude, and GPT depending on the task."</p>
+                <p><strong>A2: Latency</strong> — Network calls take anywhere from 100ms to 30 seconds. LLM calls get 20s+ timeouts. Everything else gets 5s minimum. No optimistic assumptions about speed.</p>
 
-                <p>I work at the intersection of infrastructure and AI, and I run a small venture called Nicolas Ventures where we're exploring how technology can help people with special needs live more independently. Some of that work will show up here too — how AI can assist with safety, coping, and daily tasks in ways that weren't possible a few years ago.</p>
+                <p><strong>A3: Cost</strong> — Every API call costs money. Every billable operation gets recorded. The gateway tracks per-request cost. If you can't tell me what last Tuesday cost, the system is broken.</p>
 
-                <p>If any of this sounds interesting, stick around. New posts go up as the experiments finish.</p>
+                <p><strong>A4: Reversibility</strong> — Mutations must be undoable. Every mutating endpoint has a documented rollback path or is idempotent. If it can't be reversed, it requires human approval first.</p>
+
+                <p><strong>A5: Trust</strong> — No input is trustworthy. All external input validated at the system boundary. Secrets never appear in logs. A service that trusts its caller is a service waiting to be exploited.</p>
+
+                <p><strong>A6: Observability</strong> — If it's not logged, it didn't happen. Every capability call emits a structured log with the service name, request ID, and <em>why</em> it was called. Not just what happened — why.</p>
+
+                <p><strong>A7: Uncertainty</strong> — LLM outputs are probabilistic. Every LLM response gets validated and parsed. Fallback paths exist for when the model returns garbage. Treating LLM output as reliable is the fastest way to build a fragile system.</p>
+
+                <p><strong>A8: Resource Limits</strong> — Quotas, rate limits, and budgets are real. Rate limiting is enforced. Budget caps halt execution. When a quota is exhausted, the system degrades gracefully instead of running up a bill.</p>
+
+                <p><strong>A9: Explainability</strong> — Every action must be traceable. Full audit trail: who requested it, what happened, why, what it cost, and the outcome. If you can't reconstruct what happened after the fact, you don't have a production system.</p>
+
+                <p><strong>A10: Coordination</strong> — Multi-service workflows fail at boundaries. Schema contracts are enforced. Cross-service calls use typed payloads. The service works fine in isolation — it's the handoff that kills you.</p>
+
+                <p>These aren't aspirational. Each one maps to a specific stress test that tries to break it. More on that in a future post.</p>
 
                 <div class="tags">
-                    <span class="tag">meta</span>
+                    <span class="tag">architecture</span>
+                    <span class="tag">infrastructure</span>
+                    <span class="tag">design</span>
                 </div>
             </article>
 
@@ -232,40 +248,24 @@
                 </div>
             </article>
 
-            <article class="entry" id="flux-assumptions">
+            <article class="entry" id="hello-world">
                 <div class="entry-meta">
                     <time datetime="2026-02-24">February 24, 2026</time>
                 </div>
-                <h2>10 Things I Assumed Before Writing a Line of Code</h2>
+                <h2>Why I Started Writing</h2>
 
-                <p>I'm building a platform that runs 23 services on a single machine — API proxies, Telegram bots, webhook processors, task managers, and AI pipelines — all behind one gateway. Before writing any code, I wrote down 10 assumptions about the environment these services would operate in. Every design decision flows from these.</p>
+                <p>I've been building AI-powered tools for a while now — bots, pipelines, infrastructure — and I realized I was having too much fun not to share it.</p>
 
-                <p><strong>A1: Fragility</strong> — External APIs fail without warning. Every outbound call handles timeouts, 5xx errors, and the provider simply being gone.</p>
+                <p>This site is a place to document the experiments. Some will be practical (how do you actually run a medical LLM on your own data without sending it to the cloud?). Some will be architectural (what happens when you try to consolidate 23 microservices onto one machine?). Some will just be weird ideas that seemed worth trying.</p>
 
-                <p><strong>A2: Latency</strong> — Network calls take anywhere from 100ms to 30 seconds. LLM calls get 20s+ timeouts. Everything else gets 5s minimum. No optimistic assumptions about speed.</p>
+                <p>The common thread is AI as a tool for real problems. Not "AI will change everything" thought-leadership — more like "I had a stack of medical records and wanted to know what a language model could actually find in them." Or "I wanted a Telegram bot that could switch between Gemini, Claude, and GPT depending on the task."</p>
 
-                <p><strong>A3: Cost</strong> — Every API call costs money. Every billable operation gets recorded. The gateway tracks per-request cost. If you can't tell me what last Tuesday cost, the system is broken.</p>
+                <p>I work at the intersection of infrastructure and AI, and I run a small venture called Nicolas Ventures where we're exploring how technology can help people with special needs live more independently. Some of that work will show up here too — how AI can assist with safety, coping, and daily tasks in ways that weren't possible a few years ago.</p>
 
-                <p><strong>A4: Reversibility</strong> — Mutations must be undoable. Every mutating endpoint has a documented rollback path or is idempotent. If it can't be reversed, it requires human approval first.</p>
-
-                <p><strong>A5: Trust</strong> — No input is trustworthy. All external input validated at the system boundary. Secrets never appear in logs. A service that trusts its caller is a service waiting to be exploited.</p>
-
-                <p><strong>A6: Observability</strong> — If it's not logged, it didn't happen. Every capability call emits a structured log with the service name, request ID, and <em>why</em> it was called. Not just what happened — why.</p>
-
-                <p><strong>A7: Uncertainty</strong> — LLM outputs are probabilistic. Every LLM response gets validated and parsed. Fallback paths exist for when the model returns garbage. Treating LLM output as reliable is the fastest way to build a fragile system.</p>
-
-                <p><strong>A8: Resource Limits</strong> — Quotas, rate limits, and budgets are real. Rate limiting is enforced. Budget caps halt execution. When a quota is exhausted, the system degrades gracefully instead of running up a bill.</p>
-
-                <p><strong>A9: Explainability</strong> — Every action must be traceable. Full audit trail: who requested it, what happened, why, what it cost, and the outcome. If you can't reconstruct what happened after the fact, you don't have a production system.</p>
-
-                <p><strong>A10: Coordination</strong> — Multi-service workflows fail at boundaries. Schema contracts are enforced. Cross-service calls use typed payloads. The service works fine in isolation — it's the handoff that kills you.</p>
-
-                <p>These aren't aspirational. Each one maps to a specific stress test that tries to break it. More on that in a future post.</p>
+                <p>If any of this sounds interesting, stick around. New posts go up as the experiments finish.</p>
 
                 <div class="tags">
-                    <span class="tag">architecture</span>
-                    <span class="tag">infrastructure</span>
-                    <span class="tag">design</span>
+                    <span class="tag">meta</span>
                 </div>
             </article>
 
