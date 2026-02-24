@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Happens When You Run an LLM on 10 Years of Kaiser Records — FreshAir Labs</title>
+    <meta name="description" content="I ran my complete Kaiser medical history through MedGemma and DeepSeek on rented GPUs. Privacy-first pipeline, under $4, and what the models actually found.">
+    <meta property="og:title" content="What Happens When You Run an LLM on 10 Years of Kaiser Records">
+    <meta property="og:description" content="Privacy-first medical LLM pipeline on rented GPUs. Under $4 for the full extraction.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://freshairlabs.com/posts/llm-on-kaiser-medical-records">
+    <meta property="article:published_time" content="2026-02-24">
+    <meta name="twitter:card" content="summary">
+    <link rel="canonical" href="https://freshairlabs.com/posts/llm-on-kaiser-medical-records">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <h1><a href="/">FreshAir Labs</a></h1>
+        <p>Building things, one experiment at a time.</p>
+    </header>
+
+    <nav>
+        <a href="/">Posts</a>
+    </nav>
+
+    <main>
+        <article class="post">
+            <h1>What Happens When You Run an LLM on 10 Years of Kaiser Records</h1>
+            <div class="post-meta">
+                <time datetime="2026-02-24">February 24, 2026</time>
+            </div>
+
+            <p>I downloaded my complete medical history from Kaiser — a decade of encounters, lab results, medications, vitals, and clinical notes — and ran it through a pipeline of medical language models to see what they could actually find.</p>
+
+            <h2>The privacy problem</h2>
+
+            <p>The obvious approach is to upload everything to Claude or GPT-4 and ask questions. But these are medical records. Names, dates, conditions, medications — the most sensitive data you have. Even with zero-retention API policies, your data still touches their servers, and de-identified records can be re-identified through account metadata and IP addresses.</p>
+
+            <p>So I built a three-stage pipeline:</p>
+
+            <p><strong>Stage 1 (Private extraction):</strong> Google's MedGemma 27B and DeepSeek-R1, running on rented GPUs through RunPod. The models run on hardware I control, process the records, extract structured findings, and then the GPU instance is destroyed. Total cost for extraction: under $4.</p>
+
+            <p><strong>Stage 2 (Manual enrichment):</strong> I add context no medical record contains — family history, lifestyle factors, personal health goals, symptoms I never mentioned to a doctor.</p>
+
+            <p><strong>Stage 3 (Deep analysis):</strong> Multiple analysis passes through frontier models, each with a different lens. These could be things like cardiovascular risk scoring, screening for early cognitive decline, building a checklist for your next PCP visit, or a contrarian pass that challenges the consensus from the other analyses.</p>
+
+            <h2>What the records actually look like</h2>
+
+            <p>Kaiser exports in C-CDA format — XML files following the HL7 Clinical Document Architecture standard. They use medical coding systems like SNOMED CT, ICD-10, LOINC for labs, RxNorm for medications. The structured data (lab values, medication lists, immunization dates) parses cleanly with Python's lxml — no LLM needed. Where the LLM adds value is the unstructured clinical notes and cross-referencing patterns across years of visits.</p>
+
+            <h2>What worked</h2>
+
+            <p>The private extraction pipeline captured about 80-85% of what a frontier model would find. The biggest gap was in creative, non-obvious connections — the kind of "have you considered that these three unrelated symptoms might be connected?" insights where frontier models are noticeably stronger.</p>
+
+            <p>MedGemma was the standout. Most "medical" LLMs don't actually beat general-purpose frontier models on clinical tasks. MedGemma is the exception — it was trained on real FHIR EHR data and the multimodal variant can interpret imaging alongside text.</p>
+
+            <h2>What didn't work</h2>
+
+            <p>GPU sizing was a painful lesson. We started with instances that were too small for the models we were trying to run, and our initial debugging was terrible — we kept assuming it was a configuration or code problem, not a hardware problem. So we'd retry, wait for the pod to spin up, watch it fail again, and burn through both money and time before realizing we just needed a bigger instance.</p>
+
+            <p>And the RunPod workflow itself has friction. Every time you want to run an analysis, you're logging into a web dashboard, manually configuring a pod, waiting for it to provision, SSHing in, running your scripts, and tearing it down. There's no good API-first workflow for "spin up this exact configuration, run this job, give me the results, destroy everything." It's a lot of clicking for what should be a single command.</p>
+
+            <h2>What I'd do differently</h2>
+
+            <p>The multi-pass analysis framework generates redundant findings. Three passes would have been enough. And I'd spend more time on the manual enrichment stage — the LLM can only work with what it has, and the medical record is missing half your health story.</p>
+
+            <h2>The takeaway</h2>
+
+            <p>You can run meaningful medical AI analysis on your own records for under $4, keeping the sensitive data on hardware you control. The results aren't a replacement for a doctor — but they're a remarkably good preparation for your next appointment.</p>
+
+            <div class="tags">
+                <span class="tag">llm</span>
+                <span class="tag">healthcare</span>
+                <span class="tag">privacy</span>
+                <span class="tag">runpod</span>
+            </div>
+
+            <div class="post-nav">
+                <a href="/posts/10-assumptions-before-writing-code">&larr; Prev: 10 Assumptions</a>
+                <a href="/posts/why-i-started-writing">Next: Why I Started Writing &rarr;</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        FreshAir Labs &mdash; 2026
+    </footer>
+</body>
+</html>

@@ -5,4 +5,19 @@
     <lastmod>2026-02-24</lastmod>
     <priority>1.0</priority>
   </url>
+  <url>
+    <loc>https://freshairlabs.com/posts/10-assumptions-before-writing-code</loc>
+    <lastmod>2026-02-24</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://freshairlabs.com/posts/llm-on-kaiser-medical-records</loc>
+    <lastmod>2026-02-24</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://freshairlabs.com/posts/why-i-started-writing</loc>
+    <lastmod>2026-02-24</lastmod>
+    <priority>0.8</priority>
+  </url>
 </urlset>

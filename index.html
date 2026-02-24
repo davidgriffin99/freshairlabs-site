@@ -5,146 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FreshAir Labs — AI Experiments and Infrastructure</title>
     <meta name="description" content="FreshAir Labs — writing about AI infrastructure, medical LLMs, and building things that work.">
+    <meta property="og:title" content="FreshAir Labs">
+    <meta property="og:description" content="Writing about AI infrastructure, medical LLMs, and building things that work.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freshairlabs.com/">
+    <meta name="twitter:card" content="summary">
     <link rel="canonical" href="https://freshairlabs.com/">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            color: #1a1a2e;
-            background: #fafafa;
-            line-height: 1.7;
-        }
-
-        header {
-            background: linear-gradient(135deg, #0f3443 0%, #34e89e 100%);
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-        }
-
-        header h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.5rem;
-        }
-
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.85;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        nav {
-            background: #0f3443;
-            padding: 0.8rem 2rem;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        nav a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            margin: 0 1rem;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-        }
-
-        nav a:hover, nav a.active {
-            color: #34e89e;
-        }
-
-        main {
-            max-width: 760px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-
-        .entries {
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem;
-        }
-
-        article.entry {
-            background: white;
-            border-radius: 12px;
-            padding: 2.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
-            border-left: 4px solid #34e89e;
-        }
-
-        .entry-meta {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .entry-meta time {
-            font-size: 0.85rem;
-            color: #888;
-        }
-
-        .entry h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #0f3443;
-            line-height: 1.3;
-        }
-
-        .entry h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin: 1.5rem 0 0.75rem;
-            color: #0f3443;
-        }
-
-        .entry p {
-            color: #444;
-            font-size: 1rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .entry p:last-child {
-            margin-bottom: 0;
-        }
-
-        .tags {
-            margin-top: 1.5rem;
-            padding-top: 1rem;
-            border-top: 1px solid #f0f0f0;
-        }
-
-        .tag {
-            display: inline-block;
-            background: #e8faf0;
-            color: #0f3443;
-            padding: 0.2rem 0.7rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-right: 0.4rem;
-        }
-
-        footer {
-            text-align: center;
-            padding: 3rem 2rem;
-            color: #aaa;
-            font-size: 0.85rem;
-        }
-
-        @media (max-width: 600px) {
-            header { padding: 3rem 1.5rem; }
-            header h1 { font-size: 2.2rem; }
-            main { padding: 2rem 1rem; }
-            article.entry { padding: 1.5rem; }
-        }
-    </style>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <header>
@@ -159,115 +26,32 @@
     <main>
         <div class="entries">
 
-            <article class="entry" id="flux-assumptions">
-                <div class="entry-meta">
+            <div class="entry-card">
+                <a href="/posts/10-assumptions-before-writing-code">
                     <time datetime="2026-02-24">February 24, 2026</time>
-                </div>
-                <h2>10 Things I Assumed Before Writing a Line of Code</h2>
+                    <h2>10 Things I Assumed Before Writing a Line of Code</h2>
+                    <p class="preview">I'm building a platform that runs 23 services on a single machine. Before writing any code, I wrote down 10 assumptions about the environment. Every design decision flows from these.</p>
+                    <span class="read-more">Read more</span>
+                </a>
+            </div>
 
-                <p>I'm building a platform that runs 23 services on a single machine — API proxies, Telegram bots, webhook processors, task managers, and AI pipelines — all behind one gateway. Before writing any code, I wrote down 10 assumptions about the environment these services would operate in. Every design decision flows from these.</p>
-
-                <p><strong>A1: Fragility</strong> — External APIs fail without warning. Every outbound call handles timeouts, 5xx errors, and the provider simply being gone.</p>
-
-                <p><strong>A2: Latency</strong> — Network calls take anywhere from 100ms to 30 seconds. LLM calls get 20s+ timeouts. Everything else gets 5s minimum. No optimistic assumptions about speed.</p>
-
-                <p><strong>A3: Cost</strong> — Every API call costs money. Every billable operation gets recorded. The gateway tracks per-request cost. If you can't tell me what last Tuesday cost, the system is broken.</p>
-
-                <p><strong>A4: Reversibility</strong> — Mutations must be undoable. Every mutating endpoint has a documented rollback path or is idempotent. If it can't be reversed, it requires human approval first.</p>
-
-                <p><strong>A5: Trust</strong> — No input is trustworthy. All external input validated at the system boundary. Secrets never appear in logs. A service that trusts its caller is a service waiting to be exploited.</p>
-
-                <p><strong>A6: Observability</strong> — If it's not logged, it didn't happen. Every capability call emits a structured log with the service name, request ID, and <em>why</em> it was called. Not just what happened — why.</p>
-
-                <p><strong>A7: Uncertainty</strong> — LLM outputs are probabilistic. Every LLM response gets validated and parsed. Fallback paths exist for when the model returns garbage. Treating LLM output as reliable is the fastest way to build a fragile system.</p>
-
-                <p><strong>A8: Resource Limits</strong> — Quotas, rate limits, and budgets are real. Rate limiting is enforced. Budget caps halt execution. When a quota is exhausted, the system degrades gracefully instead of running up a bill.</p>
-
-                <p><strong>A9: Explainability</strong> — Every action must be traceable. Full audit trail: who requested it, what happened, why, what it cost, and the outcome. If you can't reconstruct what happened after the fact, you don't have a production system.</p>
-
-                <p><strong>A10: Coordination</strong> — Multi-service workflows fail at boundaries. Schema contracts are enforced. Cross-service calls use typed payloads. The service works fine in isolation — it's the handoff that kills you.</p>
-
-                <p>These aren't aspirational. Each one maps to a specific stress test that tries to break it. More on that in a future post.</p>
-
-                <div class="tags">
-                    <span class="tag">architecture</span>
-                    <span class="tag">infrastructure</span>
-                    <span class="tag">design</span>
-                </div>
-            </article>
-
-            <article class="entry" id="medical-llm">
-                <div class="entry-meta">
+            <div class="entry-card">
+                <a href="/posts/llm-on-kaiser-medical-records">
                     <time datetime="2026-02-24">February 24, 2026</time>
-                </div>
-                <h2>What Happens When You Run an LLM on 10 Years of Kaiser Records</h2>
+                    <h2>What Happens When You Run an LLM on 10 Years of Kaiser Records</h2>
+                    <p class="preview">I downloaded my complete medical history and ran it through a pipeline of medical language models. Privacy-first, under $4, and what the models actually found.</p>
+                    <span class="read-more">Read more</span>
+                </a>
+            </div>
 
-                <p>I downloaded my complete medical history from Kaiser — a decade of encounters, lab results, medications, vitals, and clinical notes — and ran it through a pipeline of medical language models to see what they could actually find.</p>
-
-                <h3>The privacy problem</h3>
-
-                <p>The obvious approach is to upload everything to Claude or GPT-4 and ask questions. But these are medical records. Names, dates, conditions, medications — the most sensitive data you have. Even with zero-retention API policies, your data still touches their servers, and de-identified records can be re-identified through account metadata and IP addresses.</p>
-
-                <p>So I built a three-stage pipeline:</p>
-
-                <p><strong>Stage 1 (Private extraction):</strong> Google's MedGemma 27B and DeepSeek-R1, running on rented GPUs through RunPod. The models run on hardware I control, process the records, extract structured findings, and then the GPU instance is destroyed. Total cost for extraction: under $4.</p>
-
-                <p><strong>Stage 2 (Manual enrichment):</strong> I add context no medical record contains — family history, lifestyle factors, personal health goals, symptoms I never mentioned to a doctor.</p>
-
-                <p><strong>Stage 3 (Deep analysis):</strong> Multiple analysis passes through frontier models, each with a different lens. These could be things like cardiovascular risk scoring, screening for early cognitive decline, building a checklist for your next PCP visit, or a contrarian pass that challenges the consensus from the other analyses.</p>
-
-                <h3>What the records actually look like</h3>
-
-                <p>Kaiser exports in C-CDA format — XML files following the HL7 Clinical Document Architecture standard. They use medical coding systems like SNOMED CT, ICD-10, LOINC for labs, RxNorm for medications. The structured data (lab values, medication lists, immunization dates) parses cleanly with Python's lxml — no LLM needed. Where the LLM adds value is the unstructured clinical notes and cross-referencing patterns across years of visits.</p>
-
-                <h3>What worked</h3>
-
-                <p>The private extraction pipeline captured about 80-85% of what a frontier model would find. The biggest gap was in creative, non-obvious connections — the kind of "have you considered that these three unrelated symptoms might be connected?" insights where frontier models are noticeably stronger.</p>
-
-                <p>MedGemma was the standout. Most "medical" LLMs don't actually beat general-purpose frontier models on clinical tasks. MedGemma is the exception — it was trained on real FHIR EHR data and the multimodal variant can interpret imaging alongside text.</p>
-
-                <h3>What didn't work</h3>
-
-                <p>GPU sizing was a painful lesson. We started with instances that were too small for the models we were trying to run, and our initial debugging was terrible — we kept assuming it was a configuration or code problem, not a hardware problem. So we'd retry, wait for the pod to spin up, watch it fail again, and burn through both money and time before realizing we just needed a bigger instance.</p>
-
-                <p>And the RunPod workflow itself has friction. Every time you want to run an analysis, you're logging into a web dashboard, manually configuring a pod, waiting for it to provision, SSHing in, running your scripts, and tearing it down. There's no good API-first workflow for "spin up this exact configuration, run this job, give me the results, destroy everything." It's a lot of clicking for what should be a single command.</p>
-
-                <h3>What I'd do differently</h3>
-
-                <p>The multi-pass analysis framework generates redundant findings. Three passes would have been enough. And I'd spend more time on the manual enrichment stage — the LLM can only work with what it has, and the medical record is missing half your health story.</p>
-
-                <h3>The takeaway</h3>
-
-                <p>You can run meaningful medical AI analysis on your own records for under $4, keeping the sensitive data on hardware you control. The results aren't a replacement for a doctor — but they're a remarkably good preparation for your next appointment.</p>
-
-                <div class="tags">
-                    <span class="tag">llm</span>
-                    <span class="tag">healthcare</span>
-                    <span class="tag">privacy</span>
-                    <span class="tag">runpod</span>
-                </div>
-            </article>
-
-            <article class="entry" id="hello-world">
-                <div class="entry-meta">
+            <div class="entry-card">
+                <a href="/posts/why-i-started-writing">
                     <time datetime="2026-02-24">February 24, 2026</time>
-                </div>
-                <h2>Why I Started Writing</h2>
-
-                <p>I've been building AI-powered tools for a while now — bots, pipelines, infrastructure — and I realized I was having too much fun not to share it.</p>
-
-                <p>This site is a place to document the experiments. Some will be practical (how do you actually run a medical LLM on your own data without sending it to the cloud?). Some will be architectural (what happens when you try to consolidate 23 microservices onto one machine?). Some will just be weird ideas that seemed worth trying.</p>
-
-                <p>The common thread is AI as a tool for real problems. Not "AI will change everything" thought-leadership — more like "I had a stack of medical records and wanted to know what a language model could actually find in them." Or "I wanted a Telegram bot that could switch between Gemini, Claude, and GPT depending on the task."</p>
-
-                <p>I work at the intersection of infrastructure and AI, and I run a small venture called Nicolas Ventures where we're exploring how technology can help people with special needs live more independently. Some of that work will show up here too — how AI can assist with safety, coping, and daily tasks in ways that weren't possible a few years ago.</p>
-
-                <p>If any of this sounds interesting, stick around. New posts go up as the experiments finish.</p>
-
-                <div class="tags">
-                    <span class="tag">meta</span>
-                </div>
-            </article>
+                    <h2>Why I Started Writing</h2>
+                    <p class="preview">AI as a tool for real problems — not thought-leadership, just experiments worth sharing.</p>
+                    <span class="read-more">Read more</span>
+                </a>
+            </div>
 
         </div>
     </main>
