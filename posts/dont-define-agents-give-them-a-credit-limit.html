@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Don't "Define" Agents. Give Them a Credit Limit. — FreshAir Labs</title>
+    <meta name="description" content="There's no 'agent' there there — until you give it memory and a budget. Why underwriting is the right mental model for agentic security.">
+    <meta property="og:title" content="Don't &quot;Define&quot; Agents. Give Them a Credit Limit.">
+    <meta property="og:description" content="There's no 'agent' there there — until you give it memory and a budget. Why underwriting is the right mental model for agentic security.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://freshairlabs.com/posts/dont-define-agents-give-them-a-credit-limit">
+    <meta property="article:published_time" content="2026-03-05">
+    <meta name="twitter:card" content="summary">
+    <link rel="canonical" href="https://freshairlabs.com/posts/dont-define-agents-give-them-a-credit-limit">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <h1><a href="/">FreshAir Labs</a></h1>
+        <p>Building things, one experiment at a time.</p>
+    </header>
+
+    <nav>
+        <a href="/">Posts</a>
+    </nav>
+
+    <main>
+        <article class="post">
+            <h1>Don't "Define" Agents. Give Them a Credit Limit.</h1>
+            <div class="post-meta">
+                <time datetime="2026-03-05">March 5, 2026</time>
+            </div>
+
+            <p class="authors"><strong>Ideas / conceptual model:</strong> David Griffin (~70%), AI assistant (~10%), developed together (~20%)<br>
+            <strong>Write-up / drafting:</strong> AI assistant (~85%) (with David's direction, edits, and framing)</p>
+
+            <p>There's no "agent" there there &mdash; until you give it <strong>memory</strong> and a <strong>budget</strong>.</p>
+
+            <ul>
+                <li><strong>Memory</strong> (in agentic systems) isn't a single place. It's <em>any durable state the system can use later</em>: conversation summaries, retrieved docs, vector stores, task queues, tool logs, user profiles, cached results &mdash; anything that lets it <strong>carry intent and context forward</strong> and compound effects over time.</li>
+                <li><strong>Budget</strong> isn't always money. It's <em>any bounded allowance to cause consequences</em>: dollars, number of actions, volume of data touched/exported, compute/time, concurrency/spawn limits, or even a risk threshold. A budget is what makes an actor <strong>operationally powerful</strong> &mdash; and therefore governable.</li>
+            </ul>
+
+            <p>Once you give a system durable memory and a bounded allowance to act, it starts behaving less like a program and more like an actor. And that's why the deceptively simple question &mdash; <em>"what is an agent?"</em> &mdash; keeps dissolving into edge cases: scripts that schedule themselves, workflows that fork, swarms that spawn, assistants that "go away" and resume later, tool routers that fan out across SaaS, and systems that act on behalf of humans.</p>
+
+            <p>The shape shifts. The consequences don't.</p>
+
+            <p>So instead of chasing the perfect definition of "agent," I think we should borrow a model that has spent centuries dealing with fuzzy actors, shifting risk, and expensive mistakes:</p>
+
+            <p><strong>Underwriting.</strong></p>
+
+            <p>Not as a gimmick. As a control philosophy.</p>
+
+            <h2>Why "what is an agent?" keeps failing</h2>
+
+            <p>If you've been following the agentic space, you've probably seen several competing definitions (all partially right):</p>
+
+            <ul>
+                <li><strong>Agent as an executable process</strong>: something running somewhere that can take actions.</li>
+                <li><strong>Agent as a workflow unit</strong>: a durable, multi-step job with state and branching.</li>
+                <li><strong>Agent as an embodiment</strong>: a device/robot that senses and acts in the physical world.</li>
+                <li><strong>Agent as a stack</strong>: LLM + memory + tools + orchestration + feedback loop.</li>
+                <li><strong>Agent as delegated authority</strong>: software acting "for" someone (or something) within a scope.</li>
+            </ul>
+
+            <p>It's worth acknowledging these because they're not wrong &mdash; they each capture a slice of reality.</p>
+
+            <p>But here's the problem:</p>
+
+            <p><strong>Every one of those definitions breaks when the implementation changes.</strong> And the field is moving fast enough that implementations will keep changing.</p>
+
+            <ul>
+                <li>A "process" today becomes serverless tomorrow.</li>
+                <li>A "workflow" becomes an emergent swarm next week.</li>
+                <li>The "LLM+tools" stack changes shape with every new tool protocol.</li>
+                <li>Delegation chains become multi-hop, multi-party, and long-lived.</li>
+                <li>The same "agent" disappears and later resumes in a new environment.</li>
+            </ul>
+
+            <p>So if you build your governance around one crisp ontology, you'll keep getting surprised. The "agent" will route around your definition.</p>
+
+            <p>A better move is to shift the question:</p>
+
+            <p><strong>Not "what is an agent?" but "where do consequences happen, and how do we bound them?"</strong></p>
+
+            <p>That pivot is the entire game.</p>
+
+            <h2>Consequences have addresses (even if agents don't)</h2>
+
+            <p>"Agents" may be distributed and fuzzy. But the points where they can cause harm are usually very concrete:</p>
+
+            <ul>
+                <li><strong>Token minting / delegation</strong> (what authority gets granted?)</li>
+                <li><strong>Tool gateways</strong> (where do tool calls pass through?)</li>
+                <li><strong>Data ingress/egress</strong> (what can be read/exported?)</li>
+                <li><strong>Durable memory writes</strong> (what gets stored, learned, retained?)</li>
+                <li><strong>Infrastructure changes</strong> (who can change prod?)</li>
+                <li><strong>Communications</strong> (who can message humans or systems at scale?)</li>
+                <li><strong>Economic actions</strong> (who can spend, commit, refund, or obligate?)</li>
+            </ul>
+
+            <p>These are boundary conditions. Choke points. Places where intent becomes consequence.</p>
+
+            <p>And this is where underwriting becomes a powerful metaphor &mdash; because underwriting is built to handle exactly what agentic systems introduce:</p>
+
+            <ul>
+                <li>fuzzy actors,</li>
+                <li>shifting context,</li>
+                <li>escalating privileges,</li>
+                <li>and expensive mistakes.</li>
+            </ul>
+
+            <h2>Underwriting: the right mental model for agentic security</h2>
+
+            <p>Banks don't try to philosophically define "trustworthy personhood."</p>
+
+            <p>They do something more operational:</p>
+
+            <ul>
+                <li>You get an <strong>account</strong> before you get a <strong>loan</strong>.</li>
+                <li>You get a <strong>small credit line</strong> before you get a big one.</li>
+                <li>Your <strong>ATM withdrawal limit</strong> is not your net worth.</li>
+                <li>Big purchases can get <strong>holds</strong> and <strong>manual review</strong>.</li>
+                <li>A sudden spending change triggers <strong>fraud checks</strong>.</li>
+                <li>Material changes prompt <strong>re-evaluation</strong>.</li>
+            </ul>
+
+            <p>That maps astonishingly well to agentic systems.</p>
+
+            <p>So here's the thesis:</p>
+
+            <p><strong>Treat agentic access like a credit system: issue scoped limits at the choke points, observe behavior, and adjust authority continuously &mdash; especially when something materially changes.</strong></p>
+
+            <p>This is "Zero Trust" translated into a language people instinctively understand: <strong>risk, limits, escalation, and liability.</strong></p>
+
+            <h2>The Agent Underwriting Model</h2>
+
+            <h3>1) Start with an account, not carte blanche</h3>
+
+            <p>Before an agent can do meaningful work, it needs a home for accountability &mdash; an "account record" you can point to.</p>
+
+            <p>That usually begins with an owner/sponsor (human or org) because <strong>someone</strong> ultimately carries responsibility. But here's the key: <strong>underwriting doesn't require a human to click "approve" every time.</strong> In the real world, banks don't ask a manager to approve every coffee purchase. They approve the <em>account</em>, set limits, and let most activity run autonomously.</p>
+
+            <p>Agent systems are heading the same way:</p>
+
+            <ul>
+                <li>agents will <strong>discover opportunities</strong>, <strong>initiate actions</strong>, and sometimes <strong>transact on their own behalf</strong></li>
+                <li>payment rails like stablecoins or protocols such as X.402-style agent commerce concepts push exactly in that direction</li>
+                <li>HITL will exist, but it won't scale as "press OK for every tool call"</li>
+            </ul>
+
+            <p>Underwriting accommodates autonomy by shifting control from <em>per-action permissioning</em> to <em>account-level constraints</em>:</p>
+
+            <ul>
+                <li>define <em>who/what is accountable</em> (even if the agent initiates)</li>
+                <li>define what "normal" looks like</li>
+                <li>set budgets and rails</li>
+                <li>require step-up only at higher risk tiers</li>
+            </ul>
+
+            <p>So the "account record" should include:</p>
+
+            <ul>
+                <li>an accountable principal (org-owned, user-owned, or product-owned),</li>
+                <li>a risk tier and permitted action classes,</li>
+                <li>policy attachments (purpose, allowed domains, data classification),</li>
+                <li>logging and audit sinks,</li>
+                <li>a lifecycle (creation, rotation, suspension, deletion),</li>
+                <li>and a place to store (or forbid) durable memory.</li>
+            </ul>
+
+            <p>In bank terms: <strong>you don't get a credit line without a customer record &mdash; even if the customer uses it autonomously.</strong></p>
+
+            <h3>2) Issue limits like a bank does: small, specific, timeboxed</h3>
+
+            <p>Instead of "Agent can access Salesforce," think in limits:</p>
+
+            <ul>
+                <li><strong>ATM limit</strong>: how much impact per time window (e.g., records/min, emails/hour).</li>
+                <li><strong>Per-transaction cap</strong>: max refund, max config change per action, max "write" operations.</li>
+                <li><strong>Merchant restrictions</strong>: which endpoints, tenants, objects, or tools are allowed.</li>
+                <li><strong>Environment restrictions</strong>: which regions/runtimes are acceptable.</li>
+                <li><strong>Timeboxing</strong>: short-lived grants that must be reissued.</li>
+            </ul>
+
+            <p>This is what least privilege looks like when you stop thinking in static roles and start thinking in operational risk.</p>
+
+            <h3>3) Underwriting inputs: build a real "agent credit file"</h3>
+
+            <p>Banks evaluate income, history, ratios, existing relationships, and references.</p>
+
+            <p>Your agent credit file might include:</p>
+
+            <ul>
+                <li><strong>Sponsor strength ("income")</strong>: who delegated this and at what seniority/approval level? (Even for "self-initiating" agents, this becomes: what product/org boundary is liable for it?)</li>
+                <li><strong>Existing relationship ("account size")</strong>: has this identity behaved well over time?</li>
+                <li><strong>Risk ratio ("DTI")</strong>: requested scope vs observed stability and controls.</li>
+                <li><strong>Behavioral history ("payment record")</strong>: incident history, anomaly rate, policy violations.</li>
+                <li><strong>Verified references ("proof")</strong>: attestation, code signing, SBOM pointers, known toolchain.</li>
+                <li><strong>Delegation provenance</strong>: acting-for chain, what it derived from, what it can pass downstream.</li>
+            </ul>
+
+            <p>The key word is <strong>verified</strong>. "References" that aren't anchored in something checkable become a reputation game.</p>
+
+            <h3>4) Step-up: higher limits require stronger proof</h3>
+
+            <p>If the system wants more authority, it has to qualify &mdash; just like a borrower.</p>
+
+            <p>Examples of step-up requirements:</p>
+
+            <ul>
+                <li>stronger attestation claims,</li>
+                <li>cleaner behavioral history,</li>
+                <li>narrower purpose binding,</li>
+                <li>stricter monitoring,</li>
+                <li>approvals for certain action classes,</li>
+                <li>dual control for irreversible operations.</li>
+            </ul>
+
+            <p>This creates a path from "toy agent" to "trusted automation" without blind faith.</p>
+
+            <h3>5) Holds and pending states for irreversible actions</h3>
+
+            <p>Some actions are not "single swipe."</p>
+
+            <p>Money movement is the obvious one, but so is:</p>
+
+            <ul>
+                <li>exporting sensitive datasets,</li>
+                <li>changing network/security posture,</li>
+                <li>provisioning privileged accounts,</li>
+                <li>deleting resources.</li>
+            </ul>
+
+            <p>Finance uses holds, pending states, and dispute mechanics because irreversible actions create liability.</p>
+
+            <p>Agent systems should borrow that structure:</p>
+
+            <ul>
+                <li>two-phase commit for high-risk actions,</li>
+                <li>review queues,</li>
+                <li>rollback windows where possible,</li>
+                <li>auditable receipts: what was requested, under what authority, what was approved.</li>
+            </ul>
+
+            <p>This is where "agent security" becomes "governance," in the best sense.</p>
+
+            <h3>6) Material change &rarr; re-underwrite (the most important rule)</h3>
+
+            <p>Banks re-check when something changes: unusual spending patterns, address changes, fraud signals.</p>
+
+            <p>Agent systems need the same instinct.</p>
+
+            <p>Material change triggers might include:</p>
+
+            <ul>
+                <li>agent version/hash changed,</li>
+                <li>toolset changed (new tool, new MCP server, new permissions),</li>
+                <li>environment changed (new runtime, new region),</li>
+                <li>delegation chain changed (new sponsor, new derived authority),</li>
+                <li>behavior anomalies (bursting, unusual targets, unusual data access),</li>
+                <li>memory profile changed (new persistent store, wider retrieval scope).</li>
+            </ul>
+
+            <p>When material change happens, the safe default is:</p>
+
+            <ul>
+                <li><strong>shrink limits</strong></li>
+                <li><strong>re-verify</strong></li>
+                <li><strong>re-issue</strong> grants</li>
+            </ul>
+
+            <p>Because "agent comes back later" isn't a corner case. It's normal.</p>
+
+            <h2>Risk-proportionate friction: weather vs money</h2>
+
+            <p>This is the part that makes the model usable instead of bureaucratic.</p>
+
+            <ul>
+                <li>"Give me the weather" &rarr; tiny blast radius; basic rate limiting is fine.</li>
+                <li>"Read 20 CRM records" &rarr; data risk; enforce scopes, DLP, audit.</li>
+                <li>"Change a WAF rule" &rarr; operational blast radius; require step-up, change windows, rollback.</li>
+                <li>"Issue refunds / move money" &rarr; liability risk; caps, holds, receipts, dispute hooks.</li>
+            </ul>
+
+            <p>Underwriting gives you a principled way to decide how much friction is appropriate.</p>
+
+            <h2>Swarms: you're underwriting a portfolio, not a single borrower</h2>
+
+            <p>Swarms are the "1000 cards opened in your name" problem.</p>
+
+            <p>Even if each worker has low authority, the aggregate can be dangerous.</p>
+
+            <p>So you need portfolio controls:</p>
+
+            <ul>
+                <li>parent budget that all spawned agents draw from,</li>
+                <li>monotone narrowing (children only get subsets),</li>
+                <li>spawn/concurrency caps,</li>
+                <li>circuit breakers at the parent grant,</li>
+                <li>lineage/audit graphs that connect outcomes to delegation chains.</li>
+            </ul>
+
+            <p>This is where governance stops being about "the agent" and becomes about <strong>the authority graph plus budgets</strong>.</p>
+
+            <h2>The payoff: you don't need the perfect definition of agent</h2>
+
+            <p>Definitions will keep breaking as architectures evolve. Underwriting survives because it's anchored to invariants:</p>
+
+            <ul>
+                <li>actions have consequences,</li>
+                <li>consequences have boundary points,</li>
+                <li>authority must be bounded,</li>
+                <li>risk changes over time,</li>
+                <li>memory makes effects compound,</li>
+                <li>evidence and revocation matter.</li>
+            </ul>
+
+            <p>So here's the bottom line:</p>
+
+            <p><strong>If it can act, it can be underwritten.</strong> And if it can't be bounded, observed, revoked, and accounted for, it's not ready for high-stakes autonomy.</p>
+
+            <p>In the agentic era, the goal isn't to win the ontology debate. It's to build systems where the worst-case outcome is still acceptable.</p>
+
+            <p>Underwriting is one of the most battle-tested ways humans have ever done that.</p>
+
+            <div class="tags">
+                <span class="tag">agents</span>
+                <span class="tag">security</span>
+                <span class="tag">governance</span>
+                <span class="tag">underwriting</span>
+            </div>
+
+            <div class="post-nav">
+                <a href="/posts/grow-dont-build">&larr; Prev: Grow, Don't Build</a>
+                <span></span>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        FreshAir Labs &mdash; 2026
+    </footer>
+</body>
+</html>
