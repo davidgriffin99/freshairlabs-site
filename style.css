@@ -134,6 +134,12 @@ article.post .post-meta {
     border-bottom: 1px solid #f0f0f0;
 }
 
+article.post hr {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 2.5rem 0;
+}
+
 article.post h2 {
     font-size: 1.2rem;
     font-weight: 600;
