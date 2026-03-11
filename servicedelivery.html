@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service Delivery Gallery</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f1e8;
+      --panel: rgba(255, 252, 245, 0.92);
+      --ink: #1e2a2a;
+      --muted: #55605c;
+      --accent: #b85c38;
+      --border: rgba(30, 42, 42, 0.12);
+      --shadow: 0 18px 40px rgba(30, 42, 42, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(184, 92, 56, 0.18), transparent 28%),
+        linear-gradient(180deg, #f8f4ea 0%, var(--bg) 100%);
+    }
+
+    header {
+      padding: 48px 24px 24px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 3vw, 3.5rem);
+      letter-spacing: 0.03em;
+    }
+
+    p {
+      margin: 12px auto 0;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    main {
+      width: min(1100px, calc(100% - 32px));
+      margin: 0 auto 48px;
+      display: grid;
+      gap: 24px;
+    }
+
+    figure {
+      margin: 0;
+      padding: 18px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    figcaption {
+      margin-bottom: 14px;
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    .callout {
+      margin: 0;
+      padding: 18px 22px;
+      border-radius: 18px;
+      background: rgba(166, 24, 24, 0.08);
+      border: 1px solid rgba(166, 24, 24, 0.18);
+      color: #a61818;
+      box-shadow: var(--shadow);
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .index {
+      display: inline-block;
+      min-width: 2.4em;
+      margin-right: 8px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid rgba(30, 42, 42, 0.08);
+      background: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Service Delivery Flow</h1>
+    <p>This all works within Codex (Claude Code too)...or can work with a DIY UI. These require API use...all of which I've done many times to Slack, RunPod, CloudFlare, HuggingFace, Github....and so on. Vibe-coding an API takes 5 min. Making it robust (time-outs,etc..) takes about 10 min.</p>
+    <p>This has a lot of the data within the local file system.</p>
+    <p>This is an imaginary storage company that has hardware, software, and services that is delivering services to a fortune500 company.</p>
+  </header>
+  <main>
+    <p class="callout">This is a possible agent architecture...TBD after more analysis.</p>
+    <figure>
+      <figcaption><span class="index">00</span>00-agents.png</figcaption>
+      <img src="00-agents.png" alt="00-agents">
+    </figure>
+    <p class="callout">you can see the "prompt" in the gray box</p>
+    <figure>
+      <figcaption><span class="index">01</span>01Intro.png</figcaption>
+      <img src="01Intro.png" alt="01Intro">
+    </figure>
+    <figure>
+      <figcaption><span class="index">02</span>02ResourcesAvail.png</figcaption>
+      <img src="02ResourcesAvail.png" alt="02ResourcesAvail">
+    </figure>
+    <figure>
+      <figcaption><span class="index">03</span>03ResourcesSelected.png</figcaption>
+      <img src="03ResourcesSelected.png" alt="03ResourcesSelected">
+    </figure>
+    <p class="callout">Note this was generated from grabbing emails</p>
+    <figure>
+      <figcaption><span class="index">04</span>04Stakeholders.png</figcaption>
+      <img src="04Stakeholders.png" alt="04Stakeholders">
+    </figure>
+    <p class="callout">Notice that the AI catches the inconsistencies of the BOM.</p>
+    <figure>
+      <figcaption><span class="index">05</span>05BOM.png</figcaption>
+      <img src="05BOM.png" alt="05BOM">
+    </figure>
+    <p class="callout">AI can create the kickoff by consolidating all the data...saving a lot of time and a lot higher accuracy.</p>
+    <figure>
+      <figcaption><span class="index">06</span>06InternalKickoff.png</figcaption>
+      <img src="06InternalKickoff.png" alt="06InternalKickoff">
+    </figure>
+    <p class="callout">The PMO can standardize these options, and the AI can tailor each one for the PM to review and select the best option after HITL.</p>
+    <figure>
+      <figcaption><span class="index">07</span>07CustomEmails.png</figcaption>
+      <img src="07CustomEmails.png" alt="07CustomEmails">
+    </figure>
+    <p class="callout">This structure can be grabbed from the PMO for standardization.</p>
+    <figure>
+      <figcaption><span class="index">08</span>08SkeletonSetup.png</figcaption>
+      <img src="08SkeletonSetup.png" alt="08SkeletonSetup">
+    </figure>
+    <p class="callout">This is a huge time-saver. The action items from the meeting notes go straight to the tracker (NO double work), can generate the next agenda, and can publish the meeting notes!</p>
+    <figure>
+      <figcaption><span class="index">09</span>09meeting-tracker.png</figcaption>
+      <img src="09meeting-tracker.png" alt="09meeting-tracker">
+    </figure>
+    <p class="callout">the AI can monitor all slack rooms and email! Proactively the agent can let you know when you need to pay attention. Additionally, no need to constantly be searching slack or email...and can add to the tracker!</p>
+    <figure>
+      <figcaption><span class="index">10</span>10Slack-n-gmail-monitoring.png</figcaption>
+      <img src="10Slack-n-gmail-monitoring.png" alt="10Slack-n-gmail-monitoring">
+    </figure>
+    <p class="callout">The AI can track similar projects and let you know when they're having problems, risk, issues! You can leverage the entire PMO!</p>
+    <figure>
+      <figcaption><span class="index">11</span>11_OtherprojectsHaving a Problem.png</figcaption>
+      <img src="11_OtherprojectsHaving a Problem.png" alt="11_OtherprojectsHaving a Problem">
+    </figure>
+    <p class="callout">Folks can access this data from Slack or directly from Codex...so a salesperson can ask questions of the data. Including "overviews" like the graphic in the top part of the screenshot outlining the project...the graphic can be color coded for severity, etc.</p>
+    <figure>
+      <figcaption><span class="index">12</span>12SEaskaboutmeeting and overall project.png</figcaption>
+      <img src="12SEaskaboutmeeting and overall project.png" alt="12SEaskaboutmeeting and overall project">
+    </figure>
+    <p class="callout">Every term for this technology can be defined to various degrees of depth.</p>
+    <figure>
+      <figcaption><span class="index">13</span>13_education.png</figcaption>
+      <img src="13_education.png" alt="13_education">
+    </figure>
+  </main>
+</body>
+</html>
